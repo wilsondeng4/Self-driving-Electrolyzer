@@ -24,9 +24,9 @@ from botorch.models.transforms.outcome import Standardize
 from ni_controller import NIUSB621xController
 from spec_sensor import SPECSensor
 from sensirion_mfc import SFC5xxxMFC
-from psd6_pumps_25mL import PSD6Pumps
+from PSD6Pumps import PSD6Pumps
 from NewEraPump import NewEraPump
-from NewPeriPump import PeriPump
+from PeriPump import PeriPump
 
 
 TORCH_DTYPE = torch.double

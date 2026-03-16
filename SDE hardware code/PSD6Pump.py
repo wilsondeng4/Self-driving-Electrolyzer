@@ -74,9 +74,7 @@ class PSD6Pumps():
             the syringe pumps just ignore it.
         '''
         # flowrate = 26.9 -> '/1V26.9R' -> Not a valid command
-        rounded_flowrates = [round(flowrates[i]) if pump_nums[i] != 3 else round(flowrates[i]/1.101) for i in range(len(pump_nums))]
-
-        #rounded_flowrates = [round(flowrate) for flowrate in flowrates]
+        rounded_flowrates = [round(flowrates[i]) for i in range(len(pump_nums))]
 
 
         for i, idx in enumerate(pump_nums):
@@ -104,18 +102,6 @@ class PSD6Pumps():
 
         time.sleep(1.0)
 
-    
-    # def refill_air(self, pump_nums: list | int = [0, 1, 2, 3]):
-    #     if isinstance(pump_nums, int):
-    #         pump_nums = [pump_nums]
-
-    #     self.select_valve(pump_nums, AIR_IN)
-    #     for idx in pump_nums:
-    #         self.PSD6_pumps[idx].write(self.command_compiler('V500A13714')) # Air refill flowrates here
-    #         if self.verbose:
-    #             print(f'PSD6 pump No.{idx}: Refilling Air')
-    #     time.sleep(0.5)
-
 
     def dispense(self, pump_nums: list | int, flowrates: list | float | int):
         ''' Non-blocking function '''
@@ -126,14 +112,7 @@ class PSD6Pumps():
 
         rounded_flowrates = [round(flowrates[i]) if pump_nums[i] != 3 else round(flowrates[i]/1.101) for i in range(len(pump_nums))]
 
-        # Apr 11: It might occur error due to the timing issue
-        # self.set_flowrate(pump_nums, flowrates) 
         self.select_valve(pump_nums, LIQUID_OUT)
-
-        # for idx in pump_nums:
-        #     self.PSD6_pumps[idx].write(self.command_compiler('A0'))
-        #     if self.verbose:
-        #         print(f'PSD6 pump No.{idx}: Dispensing')
 
         for idx, flowrate in zip(pump_nums, rounded_flowrates):
             self.PSD6_pumps[idx].write(self.command_compiler(f'V{flowrate}A0'))
@@ -141,41 +120,6 @@ class PSD6Pumps():
                 print(f'PSD6 pump No.{idx}: Dispensing at {flowrate} steps/sec - could be rounded')
 
         time.sleep(1.0)
-
-
-    # def dispense_air(self, pump_nums: list | int = [0, 1, 2, 3]):
-    #     ''' Non-blocking function '''
-    #     if isinstance(pump_nums, int):
-    #         pump_nums = [pump_nums]
-
-    #     self.select_valve(pump_nums, AIR_OUT)
-
-    #     for idx in pump_nums:
-    #         self.PSD6_pumps[idx].write(self.command_compiler('V250A0')) # Dispense air flowrates here
-    #         if self.verbose:
-    #             print(f'PSD6 pump No.{idx}: Dispensing Air')
-
-    #     time.sleep(0.5)
-
-    # def remove_bubble(self, pump_nums: list | int = [0, 1, 2, 3]):
-    #     ''' Blocking Function '''
-    #     if isinstance(pump_nums, int):
-    #         pump_nums = [pump_nums]
-
-    #     self.select_valve(pump_nums, WASTE)
-
-    #     for idx in pump_nums:
-    #         self.PSD6_pumps[idx].write(self.command_compiler('V500A0')) # Dispense air flowrates here
-    #         if self.verbose:
-    #             print(f'PSD6 pump No.{idx}: Bubble being removed in the syringe')
-
-    #     time.sleep(2.0)
-
-    #     self.stop_pumps(pump_nums)
-
-    #     # Compensate the electrolytes
-    #     self.refill(pump_nums) # Wait for 1 second in the method
-    #     self.stop_pumps(pump_nums)
 
 
     def stop_pumps(self, pump_nums: list | int = [0, 1, 2, 3]):
@@ -197,7 +141,7 @@ class PSD6Pumps():
             print(f'Closed')
 
 
-# Usage
+# Usage example
 if __name__ == '__main__':
     try:
         PSD6_controller = PSD6Pumps(verbose=True)
@@ -206,15 +150,6 @@ if __name__ == '__main__':
         PSD6_controller.initialize()
         
         print("2. Refilling")
-        # PSD6_controller.refill()
-        # time.sleep(5)
-        # PSD6_controller.refill([3])
-        # time.sleep(5)
-        # PSD6_controller.stop_pumps([3])
-
-        # PSD6_controller.dispense([3], [437])
-
-        # time.sleep(8)
 
         PSD6_controller.refill([0,1,2,3])
         time.sleep(15)

@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 21 21:35:16 2025
-
-@authors: Wilson Deng, HSLee
-"""
-
 import serial
 from serial_device import SerialDevice
 

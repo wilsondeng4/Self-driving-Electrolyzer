@@ -78,7 +78,7 @@ def acq_logei(model, X01, best_f: float):
 
 # Convert sensor signal to FE
 '''
-MODIFY THIS FUNCTION
+MODIFY THIS FUNCTION after calibration
 '''
 def sensor_to_FE(sensor):
     slope = 0.0194
@@ -260,7 +260,6 @@ class SDE:
         if isinstance(flowrates, (float, int)):
             flowrates = [round(flowrates)]      
 
-        # No longer using the method 'activation'
         if isInitial:
             SensorData = self.sensor.read()
             background_noise = SensorData[0]
@@ -364,10 +363,6 @@ class SDE:
             channels, flows = composition_to_channels_and_flows(row)
             is_init = (idx == 0 and first_is_initial)
 
-            # print(f"[runcell_sequence] {idx+1}/{n}  comp=({int(row['K'])},{int(row['Na'])},{int(row['Cs'])},{int(row['Li'])})  "
-            #     f"channels={channels}  flows={flows}  isInitial={is_init}")
-            # print(f'Performing runcell({channels}, {flows})')
-            # time.sleep(2)
             # run the experiment            
             self.runCell(channels, flows, isInitial=is_init)
             self.cleaning()
@@ -490,7 +485,6 @@ class SDE:
                 I_tr = filter_in_box(Z01_all, lb2, ub2, mask_unobs=~observed)
 
             # still tiny → restart (policy B: jump into a new region)
-            ''' MODIFY '''
             # The new center could be the place that has been visited before
             
             if I_tr.numel() < 10:
@@ -527,7 +521,6 @@ class SDE:
 
             print('######Running composition:', sample_to_run)
             pump_flowrate = [x * 5 for x in sample_to_run]
-            # print('######syringe pump flow rate:', pump_flowrate)
             self.runCell([0,1,2,3], pump_flowrate)
             self.cleaning()
 
@@ -636,7 +629,7 @@ class SDE:
         ''' 
         Activation
         '''
-        # self.runcell_sequence('./sequence/activation_sequences.csv', first_is_initial=True)
+        self.runcell_sequence('./sequence/activation_sequences.csv', first_is_initial=True)
 
         '''
         Repeatability
@@ -651,17 +644,13 @@ class SDE:
         '''
         actual campaign
         '''
-        # df_initial = pd.read_csv('./training_data_50mA_Feb17.csv')
-        # df, ids_acquired = self.bo_run(nb_iterations=45, df_initial=df_initial, log_csv_path=r'./data/TuRBO_states.csv')
-        # BO_result = df.loc[ids_acquired, ['K','Na','Cs','Li','FE']].reset_index(drop=True)
-        # BO_result.to_csv(f"./data/BO_result_50mA {datetime.now().strftime('%Y-%m-%d %H-%M-%S')}.csv", index=False) 
+        df_initial = pd.read_csv('./training_data_50mA_Feb17.csv')
+        df, ids_acquired = self.bo_run(nb_iterations=45, df_initial=df_initial, log_csv_path=r'./data/TuRBO_states.csv')
+        BO_result = df.loc[ids_acquired, ['K','Na','Cs','Li','FE']].reset_index(drop=True)
+        BO_result.to_csv(f"./data/BO_result_50mA {datetime.now().strftime('%Y-%m-%d %H-%M-%S')}.csv", index=False) 
 
-        # self.runcell_sequence('./sequence/validation_sequences.csv', first_is_initial=False)
+        self.runcell_sequence('./sequence/validation_sequences.csv', first_is_initial=False)
         '''
-        Result validation
-        '''
-        # this includes activation sequence
-        self.runcell_sequence('./sequence/result_validation_sequences.csv', first_is_initial=True)
 
 if __name__ == '__main__':
     try:

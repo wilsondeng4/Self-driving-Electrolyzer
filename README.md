@@ -48,4 +48,5 @@ This folder contains all the sequences used in the `SDEMain.py`
 ## Bayesian Optimization resource used
 
 The Bayesian Optimization algorithm used in `SDEMain.py`'s `bo_run` method uses the BOTorch python package: https://botorch.org/
+
 The Trust Region Bayesian Optimization (TuRBO) is based on the provided full optimization loop: https://botorch.org/docs/tutorials/turbo_1/

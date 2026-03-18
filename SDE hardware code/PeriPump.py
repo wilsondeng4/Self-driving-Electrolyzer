@@ -20,7 +20,6 @@ class PeriPump():
                 #Note that the 7th bit is a check sum. Since we only run at 2 different flowrate,
                 #We choose not to have a function to calculate check sum.
                 self.pump.device.write(command)
-                #after writing, pump does reply a serial command, we choose not to receive here.
                 time.sleep(0.1)
             except serial.SerialException as e:
                 print(f"Serial Error: {e}")

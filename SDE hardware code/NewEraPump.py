@@ -85,24 +85,6 @@ if __name__ == "__main__":
     time.sleep(1)
     DI.refill()
     time.sleep(20)
-    # for _ in range(3):
-    #     DI.set_flowrate(10)
-    #     DI.refill()
-    #     time.sleep(218)
-    #     DI.stop()
-    #     time.sleep(1)
 
-    #     DI.set_flowrate(100) 
-    #     DI.dispense()
-    #     time.sleep(12)
-    #     DI.stop()
-
-    #     time.sleep(1)
-    #     # time.sleep(95)
-
-    #     DI.dispense()
-    #     time.sleep(9)
-    #     DI.stop()
-    #     time.sleep(1)
 
     del DI

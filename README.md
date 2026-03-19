@@ -47,9 +47,9 @@ This folder contains all the sequences used in the `SDEMain.py`
 `sample_space.csv`: Overall discovery space, used as an input file for `bo_run` method under `SDEMain.py`.
 
 ### Code demo
-1. Make sure all SDE hardware code are contained in the same folder after installing all the required libraries.
-2. Make sure all related hardware has been connected.
-3. Make sure the sequence file path and sequence name is correctly entered at `runcell_sequence('./sequence/activation_sequences.csv', first_is_initial=True)` under the `campaign_run` function. `first_is_initial` sets if the initial experiment in this sequence is the first for a freshly assembled MEA cell. Typically, `first_is_initial=True` for activation_sequences and should be `False` for all other sequences.
+1. Make sure all SDE hardware code is contained in the same folder after installing all the required libraries.
+3. Make sure all related hardware has been connected, and correct COMPORTs are set under each hardware class.
+4. Make sure the sequence file path and sequence name are correctly entered at `runcell_sequence('./sequence/activation_sequences.csv', first_is_initial=True)` under the `campaign_run` function in `SDEMain.py`. `first_is_initial` sets if the initial experiment in this sequence is the first for a freshly assembled MEA cell. Typically, `first_is_initial=True` for activation_sequences and should be `False` for all other sequences.
 
 ## Bayesian Optimization resource used
 

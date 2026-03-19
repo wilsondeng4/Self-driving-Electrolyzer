@@ -6,6 +6,7 @@ Authors: Haoyang Deng, Hyeon Seok Lee, Mahyar Rajabi Kochi, *et al.*
 ### SDE hardware code
 
 This folder contains all the SDE hardware code
+`requirements.txt`: Python libraries needed to run the following SDE codes. Please install with `pip install` in the command window.
 
 `SDEMain.py`: Main code includes other classes. The `campaign_run` method uses `runcell_sequence` and `bo_run` methods to get predefined sequences from the `sequence` directory and perform the TuRBO campaign or other specified sequences.
 
@@ -44,6 +45,11 @@ This folder contains all the sequences used in the `SDEMain.py`
 `SDE raw data.xlsx`: Raw data of different operation conditions. Includes the metadata for the TuRBO campaign and the summarized overall discovered space for each optimized operation condition.
 
 `sample_space.csv`: Overall discovery space, used as an input file for `bo_run` method under `SDEMain.py`.
+
+### Code demo
+1. Make sure all SDE hardware code are contained in the same folder after installing all the required libraries.
+2. Make sure all related hardware has been connected.
+3. Make sure the sequence file path and sequence name is correctly entered at `runcell_sequence('./sequence/activation_sequences.csv', first_is_initial=True)` under the `campaign_run` function. `first_is_initial` sets if the initial experiment in this sequence is the first for a freshly assembled MEA cell. Typically, `first_is_initial=True` for activation_sequences and should be `False` for all other sequences.
 
 ## Bayesian Optimization resource used
 

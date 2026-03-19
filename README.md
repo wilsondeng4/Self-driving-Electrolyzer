@@ -18,7 +18,7 @@ This folder contains all the SDE hardware code
 
 `PSD6Pump.py`: Hardware class of Hamilton PSD/6 vertical precision syringe pump. This class includes operational methods for the vertical syringe pump using the RS485 communication protocol. The commands are used to control the unary electrolyte mixing and dispensing.
 
-`sensirion_mfc.py`: Hardware class of Sensirion AG SFC5500 mass flow controller. The automation uses the official Sensirion-supported library: https://sensirion.github.io/python-shdlc-sfc5xxx/index.html.
+`sensirion_mfc.py`: Hardware class of Sensirion AG SFC5500 mass flow controller. The automation uses the official Sensirion-supported library: https://sensirion.github.io/python-shdlc-sfc5xxx/index. html.https://sensirion.github.io/python-shdlc-driver/shdlc.html.
 
 `spec_sensor.py`: Hardware class of SPEC sensor DGS2 ethylene gas sensor. This class includes operational methods to monitor gas sensor signals.
 

@@ -1,0 +1,12 @@
+pandas
+matplotlib
+numpy
+threading
+torch
+botorch
+gpytorch
+scipy
+serial
+nidaqmx
+sensirion_shdlc_driver
+sensirion_shdlc_sfc5xxx
